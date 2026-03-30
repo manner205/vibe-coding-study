@@ -1,52 +1,47 @@
 import { Link, useLocation } from 'react-router-dom'
 
+const navItems = [
+  { to: '/', label: '대시보드', emoji: '📋' },
+  { to: '/roadmap', label: '로드맵', emoji: '🗺️' },
+  { to: '/memos', label: '메모', emoji: '📝' },
+]
+
 export default function Header() {
   const location = useLocation()
-  const isRoadmap = location.pathname === '/roadmap'
-  const isMemos = location.pathname === '/memos'
+  const currentPath = location.pathname
 
   return (
     <header className="bg-white border-b border-gray-200 sticky top-0 z-50">
-      <div className="max-w-3xl mx-auto px-4 py-3 flex items-center justify-between">
-        <Link to="/" className="flex items-center gap-2 no-underline">
-          <span className="text-xl">🎵</span>
-          <span className="font-bold text-gray-800 text-lg">
+      {/* 1행: 타이틀 */}
+      <div className="max-w-3xl mx-auto px-4 pt-3 pb-2 flex items-center gap-2">
+        <span className="text-xl">🎵</span>
+        <Link to="/" className="no-underline">
+          <span className="font-bold text-gray-800 text-base leading-tight">
             귀염뽀짝 이슬우의 바이브코딩
           </span>
         </Link>
-        <nav className="flex items-center gap-1">
-          <Link
-            to="/"
-            className={`text-sm px-3 py-1.5 rounded-full transition-colors font-medium ${
-              !isRoadmap
-                ? 'bg-purple-600 text-white'
-                : 'text-gray-500 hover:text-gray-800 hover:bg-gray-100'
-            }`}
-          >
-            📋 대시보드
-          </Link>
-          <Link
-            to="/roadmap"
-            className={`text-sm px-3 py-1.5 rounded-full transition-colors font-medium ${
-              isRoadmap
-                ? 'bg-purple-600 text-white'
-                : 'text-gray-500 hover:text-gray-800 hover:bg-gray-100'
-            }`}
-          >
-            🗺️ 로드맵
-          </Link>
-          <Link
-            to="/memos"
-            className={`text-sm px-3 py-1.5 rounded-full transition-colors font-medium ${
-              isMemos
-                ? 'bg-purple-600 text-white'
-                : 'text-gray-500 hover:text-gray-800 hover:bg-gray-100'
-            }`}
-          >
-            📝 메모
-          </Link>
-        </nav>
       </div>
+      {/* 2행: 탭 메뉴 */}
+      <nav className="max-w-3xl mx-auto px-4 pb-2 flex gap-2">
+        {navItems.map(({ to, label, emoji }) => {
+          const active = to === '/'
+            ? currentPath === '/' || currentPath.startsWith('/session')
+            : currentPath === to
+          return (
+            <Link
+              key={to}
+              to={to}
+              className={`flex-1 text-center text-sm py-1.5 rounded-full font-medium transition-colors ${
+                active
+                  ? 'bg-purple-600 text-white'
+                  : 'bg-gray-100 text-gray-500 hover:bg-gray-200'
+              }`}
+            >
+              {emoji} {label}
+            </Link>
+          )
+        })}
+      </nav>
     </header>
   )
 }
