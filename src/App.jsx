@@ -5,9 +5,10 @@ import Dashboard from './pages/Dashboard'
 import DayDetail from './pages/DayDetail'
 import Roadmap from './pages/Roadmap'
 import Memos from './pages/Memos'
+import KJSOProgress from './pages/KJSOProgress'
 import { useProgress } from './hooks/useProgress'
 
-const tabOrder = ['/', '/roadmap', '/memos']
+const tabOrder = ['/', '/roadmap', '/memos', '/kjso']
 
 function SwipeContainer({ children }) {
   const navigate = useNavigate()
@@ -80,6 +81,7 @@ function App() {
             />
             <Route path="/roadmap" element={<Roadmap getStatus={getStatus} />} />
             <Route path="/memos" element={<Memos getMemo={getMemo} />} />
+            <Route path="/kjso" element={<KJSOProgress />} />
           </Routes>
         </SwipeContainer>
       </div>

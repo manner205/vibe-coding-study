@@ -4,6 +4,7 @@ const navItems = [
   { to: '/', label: '대시보드', emoji: '📋' },
   { to: '/roadmap', label: '로드맵', emoji: '🗺️' },
   { to: '/memos', label: '메모', emoji: '📝' },
+  { to: '/kjso', label: 'KJSO 진도', emoji: '🔬' },
 ]
 
 export default function Header() {
@@ -22,7 +23,7 @@ export default function Header() {
         </Link>
       </div>
       {/* 2행: 탭 메뉴 */}
-      <nav className="max-w-3xl mx-auto px-4 pb-2 flex gap-2">
+      <nav className="max-w-3xl mx-auto px-4 pb-2 flex gap-1.5 overflow-x-auto">
         {navItems.map(({ to, label, emoji }) => {
           const active = to === '/'
             ? currentPath === '/' || currentPath.startsWith('/session')
@@ -31,7 +32,7 @@ export default function Header() {
             <Link
               key={to}
               to={to}
-              className={`flex-1 text-center text-sm py-1.5 rounded-full font-medium transition-colors ${
+              className={`flex-shrink-0 text-center text-xs px-3 py-1.5 rounded-full font-medium transition-colors whitespace-nowrap ${
                 active
                   ? 'bg-purple-600 text-white'
                   : 'bg-gray-100 text-gray-500 hover:bg-gray-200'
