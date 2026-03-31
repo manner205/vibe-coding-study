@@ -36,7 +36,7 @@ function SwipeContainer({ children }) {
   }
 
   return (
-    <div onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
+    <div className="min-h-screen" onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
       {children}
     </div>
   )
